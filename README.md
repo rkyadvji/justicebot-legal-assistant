@@ -6,7 +6,15 @@
 [![Groq AI](https://img.shields.io/badge/AI-Groq%20Llama%203-orange)](https://groq.com)
 [![Gemini AI](https://img.shields.io/badge/AI-Google%20Gemini-blue)](https://ai.google.dev)
 
-An AI-powered legal assistant web application for the **Department of Justice, Ministry of Law & Justice, Government of India**. Citizens can interact with an intelligent chatbot (JusticeBot) to get guidance on judicial services, case status, legal aid, Tele-Law, and more.
+An AI-powered legal assistant web application inspired by services of the **Department of Justice, Ministry of Law & Justice, Government of India**. Citizens can interact with an intelligent chatbot (JusticeBot) to get guidance on judicial services, case status, legal aid, Tele-Law, and more.
+
+## 🌐 Live Demo
+- **Frontend (Live Site):** [https://justicebot-legal-assistant.netlify.app/](https://justicebot-legal-assistant.netlify.app/)
+- **Backend (API URL):** [https://justicebot-legal-assistant.onrender.com](https://justicebot-legal-assistant.onrender.com)
+
+## 📸 Preview
+*(Add a screenshot of the app here)*
+`![App Preview](link-to-screenshot.png)`
 
 ---
 
@@ -165,3 +173,16 @@ Netlify perfectly hosts the Vite frontend!
 4. Set **Build command** to `npm run build`.
 5. Set **Publish directory** to `frontend/dist`.
 6. Click **Deploy Site**! Your frontend will now go live and communicate securely with your hosted backend.
+
+---
+
+## ⚠️ Disclaimer
+- This project is developed strictly for **educational purposes**.
+- It does **not** provide official or binding legal advice.
+- Users should always consult qualified legal professionals or advocates for real legal matters.
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.  
+&copy; 2026 Raushan Kumar Yadav. All rights reserved.
