@@ -1,0 +1,146 @@
+{
+  "services": [
+    {
+      "id": "ecourts",
+      "name": "eCourts Services",
+      "nameHi": "ई-कोर्ट सेवाएं",
+      "description": "Access case information, court orders, and judgments online through the National eCourts platform.",
+      "descriptionHi": "राष्ट्रीय ई-कोर्ट प्लेटफॉर्म के माध्यम से केस की जानकारी, न्यायालय के आदेश और निर्णय ऑनलाइन प्राप्त करें।",
+      "icon": "⚖️",
+      "url": "https://ecourts.gov.in",
+      "category": "Court Services"
+    },
+    {
+      "id": "telelaw",
+      "name": "Tele-Law Services",
+      "nameHi": "टेली-लॉ सेवाएं",
+      "description": "Get free legal advice from empanelled lawyers via video conferencing at Common Service Centres (CSCs).",
+      "descriptionHi": "सामान्य सेवा केंद्रों (CSC) पर वीडियो कॉन्फ्रेंसिंग के माध्यम से पैनल के वकीलों से मुफ्त कानूनी सलाह लें।",
+      "icon": "📞",
+      "url": "https://tele-law.in",
+      "category": "Legal Aid"
+    },
+    {
+      "id": "traffic-fine",
+      "name": "Traffic Fine Payment",
+      "nameHi": "यातायात जुर्माना भुगतान",
+      "description": "Pay traffic fines online through the Vahan portal. Quick, secure, and paperless payment system.",
+      "descriptionHi": "वाहन पोर्टल के माध्यम से ऑनलाइन यातायात जुर्माना भरें। त्वरित, सुरक्षित और कागज रहित भुगतान प्रणाली।",
+      "icon": "🚔",
+      "url": "https://echallan.parivahan.gov.in",
+      "category": "Traffic"
+    },
+    {
+      "id": "fasttrack",
+      "name": "Fast Track Courts",
+      "nameHi": "फास्ट ट्रैक कोर्ट",
+      "description": "Special fast-track courts for expeditious disposal of cases, especially for heinous crimes and atrocities.",
+      "descriptionHi": "मामलों के त्वरित निपटारे के लिए विशेष फास्ट ट्रैक कोर्ट, विशेषकर जघन्य अपराधों के लिए।",
+      "icon": "🏛️",
+      "url": "https://doj.gov.in/fast-track-special-courts",
+      "category": "Court Services"
+    },
+    {
+      "id": "legal-aid",
+      "name": "Legal Aid",
+      "nameHi": "कानूनी सहायता",
+      "description": "Free legal services for underprivileged citizens through NALSA (National Legal Services Authority).",
+      "descriptionHi": "NALSA (राष्ट्रीय कानूनी सेवा प्राधिकरण) के माध्यम से वंचित नागरिकों के लिए निःशुल्क कानूनी सेवाएं।",
+      "icon": "🤝",
+      "url": "https://nalsa.gov.in",
+      "category": "Legal Aid"
+    },
+    {
+      "id": "njdg",
+      "name": "NJDG - National Judicial Data Grid",
+      "nameHi": "NJDG - राष्ट्रीय न्यायिक डेटा ग्रिड",
+      "description": "Track pendency and disposal of cases across all district and High Courts in India.",
+      "descriptionHi": "भारत के सभी जिला और उच्च न्यायालयों में मामलों की लंबितता और निपटान को ट्रैक करें।",
+      "icon": "📊",
+      "url": "https://njdg.ecourts.gov.in",
+      "category": "Data & Analytics"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "How do I check my case status?",
+      "questionHi": "मैं अपना केस स्टेटस कैसे चेक करूं?",
+      "answer": "You can check your case status using your CNR (Case Number Record) number on the eCourts portal at ecourts.gov.in, or by entering your CNR number in the Case Status section of this app.",
+      "answerHi": "आप ecourts.gov.in पर ई-कोर्ट पोर्टल पर अपने CNR (केस नंबर रिकॉर्ड) नंबर का उपयोग करके अपना केस स्टेटस देख सकते हैं।"
+    },
+    {
+      "question": "What is Tele-Law?",
+      "questionHi": "टेली-लॉ क्या है?",
+      "answer": "Tele-Law is a government scheme offering free legal advice to marginalized citizens through video conferencing at Common Service Centres (CSCs). It connects citizens with empanelled lawyers across India.",
+      "answerHi": "टेली-लॉ एक सरकारी योजना है जो सामान्य सेवा केंद्रों (CSCs) पर वीडियो कॉन्फ्रेंसिंग के माध्यम से हाशिए पर रहने वाले नागरिकों को मुफ्त कानूनी सलाह प्रदान करती है।"
+    },
+    {
+      "question": "How to apply for legal aid?",
+      "questionHi": "कानूनी सहायता के लिए कैसे आवेदन करें?",
+      "answer": "Eligible citizens can apply for free legal aid through NALSA (National Legal Services Authority) at nalsa.gov.in or visit the nearest District Legal Services Authority (DLSA) office.",
+      "answerHi": "पात्र नागरिक nalsa.gov.in पर NALSA (राष्ट्रीय कानूनी सेवा प्राधिकरण) के माध्यम से या निकटतम जिला कानूनी सेवा प्राधिकरण (DLSA) कार्यालय में जाकर मुफ्त कानूनी सहायता के लिए आवेदन कर सकते हैं।"
+    },
+    {
+      "question": "How to pay traffic fine online?",
+      "questionHi": "ऑनलाइन यातायात जुर्माना कैसे भरें?",
+      "answer": "Visit echallan.parivahan.gov.in, enter your challan number or vehicle number, verify the fine details, and pay through net banking, UPI, or credit/debit card.",
+      "answerHi": "echallan.parivahan.gov.in पर जाएं, अपना चालान नंबर या वाहन नंबर दर्ज करें, जुर्माने का विवरण सत्यापित करें, और नेट बैंकिंग, UPI, या क्रेडिट/डेबिट कार्ड के माध्यम से भुगतान करें।"
+    },
+    {
+      "question": "What are the eligibility criteria for Tele-Law?",
+      "answerHi": "...",
+      "answer": "Tele-Law primarily targets marginalized citizens including SC/ST communities, women, persons with disabilities, daily wage workers, and those below the poverty line. Any citizen can access the service at CSC centers."
+    }
+  ],
+  "legalInfo": [
+    {
+      "id": "fundamental-rights",
+      "title": "Fundamental Rights",
+      "titleHi": "मौलिक अधिकार",
+      "category": "Constitutional Law",
+      "content": "The Constitution of India guarantees six fundamental rights: Right to Equality (Articles 14-18), Right to Freedom (Articles 19-22), Right against Exploitation (Articles 23-24), Right to Freedom of Religion (Articles 25-28), Cultural and Educational Rights (Articles 29-30), and Right to Constitutional Remedies (Article 32).",
+      "icon": "📜"
+    },
+    {
+      "id": "consumer-rights",
+      "title": "Consumer Rights",
+      "titleHi": "उपभोक्ता अधिकार",
+      "category": "Consumer Law",
+      "content": "Under the Consumer Protection Act 2019, consumers have rights including: right to safety, right to be informed, right to choose, right to be heard, right to seek redressal, and right to consumer education. File complaints at consumerhelpline.gov.in or District Consumer Forum.",
+      "icon": "🛒"
+    },
+    {
+      "id": "property-law",
+      "title": "Property Rights",
+      "titleHi": "संपत्ति अधिकार",
+      "category": "Property Law",
+      "content": "Property disputes can be filed at Civil Courts. Key laws include Transfer of Property Act 1882, Registration Act 1908, and Land Acquisition Act. Women have equal property rights under Hindu Succession Act 2005 amendment.",
+      "icon": "🏠"
+    },
+    {
+      "id": "cyber-law",
+      "title": "Cyber Laws",
+      "titleHi": "साइबर कानून",
+      "category": "IT Law",
+      "content": "India's IT Act 2000 and its amendments govern cyber crimes. Report cyber crimes at cybercrime.gov.in. Offenses include hacking (Sec 66), identity theft (Sec 66C), cyber stalking (Sec 66A), and online fraud. Penalties range from fines to imprisonment.",
+      "icon": "💻"
+    },
+    {
+      "id": "domestic-violence",
+      "title": "Protection from Domestic Violence",
+      "titleHi": "घरेलू हिंसा से सुरक्षा",
+      "category": "Family Law",
+      "content": "The Protection of Women from Domestic Violence Act 2005 provides protection orders, residence orders, and monetary relief. Victims can approach a Protection Officer or file complaint at the nearest police station. Helpline: 181 (Women Helpline).",
+      "icon": "🛡️"
+    },
+    {
+      "id": "rti",
+      "title": "Right to Information (RTI)",
+      "titleHi": "सूचना का अधिकार (RTI)",
+      "category": "Administrative Law",
+      "content": "Under RTI Act 2005, citizens can request information from any public authority within 30 days. File RTI online at rtionline.gov.in. First appeal goes to First Appellate Authority, second to Central/State Information Commission.",
+      "icon": "📋"
+    }
+  ],
+  "systemPrompt": "You are JusticeBot, an AI-powered legal assistant for the Department of Justice, Government of India. Your role is to help Indian citizens understand their legal rights, judicial services, and guide them through government portals. You have deep knowledge of: eCourts services, Tele-Law, traffic fine payment, legal aid (NALSA), Fast Track Courts, RTI, consumer rights, fundamental rights, property law, cyber law, and family law. Always be helpful, accurate, and cite relevant government portals. For serious legal matters, always advise users to consult a qualified lawyer. Respond in the same language as the user - English or Hindi. Be empathetic and use simple, accessible language. Never give legal advice that could harm the user; instead guide them to appropriate government services."
+}

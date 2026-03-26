@@ -1,0 +1,21 @@
+=== Phase 1: Test with valid Groq ===
+[Smart Match] Offline dictionary invoked for test_user_1774498792799
+Response 1 Source: knowledge
+\n=== Phase 2: Test with INVALID Groq Key, VALID Gemini ===
+[Smart Match] Offline dictionary invoked for test_user_1774498792826
+Response 2 Source: knowledge
+\n=== Phase 3: Test with INVALID Groq AND INVALID Gemini ===
+Groq Failed -> Switching to Gemini
+Gemini Failed -> Using Offline Response
+Offline Mode Activated
+Response 3 Source: offline_fallback
+Response 3 Content: I am currently operating in Offline Mode, but I can still provide essential legal guidance.
+
+Here is some predefined guidance regarding common queries:
+• **FIR & Police:** If police refuse an FIR, you can send a written complaint to the SP. For emergencies, dial 112.
+• **Case Status:** Track your ongoing cases at ecourts.gov.in using your 16-digit CNR.
+• **Traffic Fines:** Pay your eChallans online safely at echallan.parivahan.gov.in.
+• **Cyber Crime:** Dial 1930 immediately or visit cybercrime.gov.in for online fraud.
+• **Free Legal Aid:** NALSA (nalsa.gov.in) provides free legal assistance to women, children, SC/ST, and low-income citizens.
+
+Please reach out to your nearest District Legal Services Authority (DLSA) for immediate help.
