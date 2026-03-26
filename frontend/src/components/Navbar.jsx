@@ -42,8 +42,8 @@ export default function Navbar() {
             <button className={`lang-btn${lang === 'en' ? ' active' : ''}`} onClick={() => lang !== 'en' && toggle()}>EN</button>
             <button className={`lang-btn${lang === 'hi' ? ' active' : ''}`} onClick={() => lang !== 'hi' && toggle()}>हिं</button>
           </div>
-          <NavLink to="/chatbot" className="btn btn-primary btn-sm">
-            💬 {lang === 'en' ? 'Ask JusticeBot' : 'पूछें'}
+          <NavLink to="/chatbot" className="btn btn-primary btn-sm nav-chat-btn">
+            💬 <span className="hidden-mobile">{lang === 'en' ? 'Ask JusticeBot' : 'पूछें'}</span>
           </NavLink>
         </div>
       </div>

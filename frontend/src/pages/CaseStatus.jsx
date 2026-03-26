@@ -60,7 +60,7 @@ export default function CaseStatus() {
               maxLength={20}
             />
             <button className="btn btn-primary" onClick={search} disabled={loading}>
-              {loading ? '⏳' : '🔍'} {isHi ? 'खोजें' : 'Search'}
+              {loading ? <span className="spinner"></span> : '🔍'} {isHi ? 'खोजें' : 'Search'}
             </button>
           </div>
           <div style={{ marginTop: 14 }}>
@@ -81,6 +81,10 @@ export default function CaseStatus() {
           <div style={{ maxWidth: 640, margin: '0 auto 24px', padding: '16px 20px', background: 'rgba(244,67,54,0.1)', border: '1px solid rgba(244,67,54,0.3)', borderRadius: 'var(--radius-md)', color: '#EF9A9A', fontSize: 14 }}>
             ❌ {error}
           </div>
+        )}
+
+        {loading && !result && !error && (
+          <div className="case-result glass skeleton skeleton-box" style={{ height: 300 }}></div>
         )}
 
         {result && (

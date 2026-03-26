@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© {year} Department of Justice, Ministry of Law and Justice, Government of India. All rights reserved.</p>
+          <p>© {year} JusticeBot. All rights reserved. Built by Raushan Kumar Yadav</p>
           <p style={{ fontSize: 11, color: 'var(--text-muted)' }}>
             ⚠️ This is a demonstration application. For legal advice, consult a qualified lawyer.
           </p>

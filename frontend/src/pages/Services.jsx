@@ -38,8 +38,10 @@ export default function Services() {
       <section className="section">
         <div className="container">
           {loading ? (
-            <div style={{ textAlign: 'center', color: 'var(--text-muted)', padding: 60 }}>
-              Loading services...
+            <div className="services-grid">
+              {Array(6).fill().map((_, i) => (
+                <div key={`skel-${i}`} className="service-card skeleton" style={{ height: 210 }}></div>
+              ))}
             </div>
           ) : (
             <div className="services-grid">

@@ -202,7 +202,7 @@ export default function Chatbot() {
                 disabled={isLoading}
               />
               <button className="send-btn" onClick={() => sendMessage()} disabled={!input.trim() || isLoading} title="Send">
-                ➤
+                {isLoading ? <span className="spinner-small"></span> : '➤'}
               </button>
             </div>
             <p className="chat-input-footer">
