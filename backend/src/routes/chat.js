@@ -161,8 +161,8 @@ router.post('/', async (req, res) => {
 
   // Initialize session
   if (!userSessions[sessionId]) {
-    userSessions[sessionId] = { 
-      lastIntent: null, 
+    userSessions[sessionId] = {
+      lastIntent: null,
       geminiCount: 0,
       history: []
     };
@@ -197,7 +197,7 @@ router.post('/', async (req, res) => {
     // 2️⃣ GREETING DETECTION
     const greetingWords = ['hi', 'hello', 'hey', 'namaste', 'pranam', 'hello!', 'hi!', 'hey!'];
     const firstWord = lowerMsg.split(' ')[0] || lowerMsg;
-    
+
     if (greetingWords.includes(firstWord.replace(/[^a-z!]/gi, ''))) {
       const greeting = `Hello! I'm JusticeBot 🇮🇳\nYour Department of Justice assistant.\n\nI can help you with:\n1. Case Status (eCourts)\n2. Traffic Fine (eChallan)\n3. Free Legal Aid (NALSA)\n4. Tele-Law (CSC)\n\nHow can I assist you today?`;
       return sendResponse(greeting, 'greeting');
@@ -246,7 +246,7 @@ router.post('/', async (req, res) => {
     if (activeIntent) {
       session.lastIntent = activeIntent;
       const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
-      
+
       if (activeIntent === 'case_status') {
         const variations = [
           `You can easily check your case status online. Here are the steps:\n\n• Visit the eCourts portal: https://ecourts.gov.in\n• Click on "Case Status"\n• Provide your 16-digit CNR number\n• View your case details securely`,
@@ -311,7 +311,7 @@ router.post('/', async (req, res) => {
           temperature: 0.3,
           max_tokens: 500
         });
-        
+
         const replyText = completion.choices[0]?.message?.content;
         if (replyText && replyText.trim().length > 0) {
           aiResponse = replyText;
@@ -331,7 +331,7 @@ router.post('/', async (req, res) => {
     // Try Gemini Second (SECONDARY)
     if (!aiResponse && session.geminiCount < REQUEST_LIMIT && genAI) {
       try {
-        const model = genAI.getGenerativeModel({ 
+        const model = genAI.getGenerativeModel({
           model: 'gemini-2.5-flash',
           systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] }
         });
@@ -347,7 +347,7 @@ router.post('/', async (req, res) => {
         });
 
         const result = await chat.sendMessage(message);
-        
+
         if (result && result.response && typeof result.response.text === 'function') {
           const replyText = result.response.text();
           if (replyText && replyText.trim().length > 0) {
@@ -374,9 +374,9 @@ router.post('/', async (req, res) => {
       return sendResponse(aiResponse, aiSource);
     } else {
       console.log("Offline Mode Activated");
-      
+
       let offlineResponse = "";
-      
+
       if (session.lastIntent) {
         offlineResponse += `I'm currently unable to connect to my AI network, but I see you need help with **${session.lastIntent.replace('_', ' ')}**.\n\n`;
         offlineResponse += `Please consult a legal expert or visit your nearest District Legal Services Authority (DLSA) for proper assistance.`;
@@ -388,7 +388,7 @@ router.post('/', async (req, res) => {
           `• Traffic Fines (eChallan)\n` +
           `• Free Legal Aid (NALSA)`;
       }
-      
+
       return sendResponse(offlineResponse, 'offline_fallback');
     }
 
