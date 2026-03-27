@@ -18,7 +18,28 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => console.log('SW Registered!', reg))
+      .then(registration => {
+        console.log('SW Registered!', registration);
+        
+        // Handle updates
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              console.log('New version available. Reloading...');
+            }
+          };
+        };
+      })
       .catch(err => console.log('SW Registration Failed:', err));
+
+    // Handle auto-reload when the new SW takes control
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        window.location.reload();
+        refreshing = true;
+      }
+    });
   });
 }
