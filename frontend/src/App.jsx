@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatFAB from './components/ChatFAB';
+import InstallPrompt from './components/InstallPrompt';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Chatbot from './pages/Chatbot';
@@ -26,6 +27,7 @@ function AppContent() {
       </main>
       {!isChatPage && <Footer />}
       {!isChatPage && <ChatFAB />}
+      <InstallPrompt />
     </>
   );
 }

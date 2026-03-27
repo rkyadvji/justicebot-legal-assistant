@@ -11,5 +11,14 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL || '';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
 )
+
+// Register Service Worker for offline support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('SW Registered!', reg))
+      .catch(err => console.log('SW Registration Failed:', err));
+  });
+}
