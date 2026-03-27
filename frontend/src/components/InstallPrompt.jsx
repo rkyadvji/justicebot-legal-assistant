@@ -5,13 +5,21 @@ const InstallPrompt = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Detect mobile screen or handheld device
+    const isMobile = window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    // Check if app is already in standalone mode (installed)
+    const isInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
     const handler = (e) => {
       // Prevent the default browser install prompt
       e.preventDefault();
       // Stash the event so it can be triggered later
       setDeferredPrompt(e);
-      // Show our custom UI
-      setIsVisible(true);
+      // Show our custom UI ONLY for mobile devices that are not already installed
+      if (isMobile && !isInstalled) {
+        setIsVisible(true);
+      }
     };
 
     window.addEventListener('beforeinstallprompt', handler);
@@ -26,11 +34,11 @@ const InstallPrompt = () => {
 
     // Show the browser's install prompt
     deferredPrompt.prompt();
-    
+
     // Wait for the user to respond to the prompt
     const { outcome } = await deferredPrompt.userChoice;
     console.log(`User response to install prompt: ${outcome}`);
-    
+
     // We've used the prompt, and can't use it again, so clear it
     setDeferredPrompt(null);
     setIsVisible(false);
@@ -68,7 +76,7 @@ const InstallPrompt = () => {
         <p style={{ margin: 0, color: '#94a3b8', fontSize: '0.9rem' }}>Add to home screen for a premium app experience.</p>
       </div>
       <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
-        <button 
+        <button
           onClick={() => setIsVisible(false)}
           style={{
             flex: 1,
@@ -82,7 +90,7 @@ const InstallPrompt = () => {
         >
           Later
         </button>
-        <button 
+        <button
           onClick={handleInstallClick}
           style={{
             flex: 2,
