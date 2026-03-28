@@ -3,15 +3,12 @@ import ReactMarkdown from 'react-markdown';
 import { useLanguage } from '../context/LanguageContext';
 import { useChat } from '../context/ChatContext';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const QUICK_PROMPTS_EN = [
   'How do I check my case status?',
   'What is Tele-Law and how to access it?',
   'How do I pay a traffic fine online?',
   'How to get free legal aid in India?',
-  'What are my fundamental rights?',
-  'How to file an RTI application?',
 ];
 
 const QUICK_PROMPTS_HI = [
@@ -19,16 +16,14 @@ const QUICK_PROMPTS_HI = [
   'टेली-लॉ क्या है और कैसे उपयोग करें?',
   'ऑनलाइन ट्रैफिक जुर्माना कैसे भरें?',
   'भारत में मुफ्त कानूनी सहायता कैसे पाएं?',
-  'मेरे मौलिक अधिकार क्या हैं?',
-  'RTI आवेदन कैसे करें?',
 ];
 
-const SIDEBAR_SERVICES = [
-  { icon: '⚖️', label: '/ eCourts', labelHi: 'ई-कोर्ट', url: 'https://ecourts.gov.in' },
-  { icon: '📞', label: 'Tele-Law', labelHi: 'टेली-लॉ', url: 'https://tele-law.in' },
-  { icon: '🤝', label: 'NALSA Legal Aid', labelHi: 'NALSA सहायता', url: 'https://nalsa.gov.in' },
-  { icon: '🚔', label: 'Pay Traffic Fine', labelHi: 'जुर्माना भरें', url: 'https://echallan.parivahan.gov.in' },
-  { icon: '📊', label: 'NJDG', labelHi: 'NJDG', url: 'https://njdg.ecourts.gov.in' },
+const LEGAL_SERVICES = [
+  { name: { en: 'eCourts', hi: 'ई-कोर्ट्स' }, icon: '⚖️', url: 'https://ecourts.gov.in/' },
+  { name: { en: 'Tele-Law', hi: 'टेली-लॉ' }, icon: '📞', url: 'https://www.tele-law.in/' },
+  { name: { en: 'NALSA Legal Aid', hi: 'NALSA कानूनी सहायता' }, icon: '🤝', url: 'https://nalsa.gov.in/' },
+  { name: { en: 'Pay Traffic Fine', hi: 'ट्रैफिक चालान' }, icon: '🚔', url: 'https://echallan.parivahan.gov.in/' },
+  { name: { en: 'NJDG', hi: 'NJDG' }, icon: '📊', url: 'https://njdg.ecourts.gov.in/' },
 ];
 
 function formatTime(date) {
@@ -53,20 +48,21 @@ export default function Chatbot() {
     if (!msgText || isLoading) return;
 
     setInput('');
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+    }
     addMessage('user', msgText);
     setIsLoading(true);
 
-    // Build history for context
     const history = messages.map(m => ({ role: m.role, content: m.content }));
 
     try {
       const res = await axios.post('/api/chat', { message: msgText, history, language: lang });
       addMessage('bot', res.data.response);
     } catch (e) {
-      const errorMessage = e.response?.data?.response || (isHi
-        ? '❌ क्षमा करें, अभी सर्वर से कनेक्ट नहीं हो पा रहा। कृपया पुनः प्रयास करें।'
-        : '❌ Sorry, I could not connect to the server. Please make sure the backend is running and try again.');
-      addMessage('bot', errorMessage);
+      addMessage('bot', isHi
+        ? '❌ क्षमा करें, सर्वर से कनेक्ट नहीं हो पाया। कृपया पुनः प्रयास करें।'
+        : '❌ Sorry, could not connect to the server. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -79,7 +75,6 @@ export default function Chatbot() {
     }
   };
 
-  // Auto-resize textarea
   const handleInput = (e) => {
     setInput(e.target.value);
     const ta = textareaRef.current;
@@ -90,127 +85,155 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="chat-page">
-      <div className="chat-layout">
-        {/* Sidebar */}
-        <aside className="chat-sidebar">
-          <p className="sidebar-section-title">{isHi ? 'त्वरित प्रश्न' : 'Quick Prompts'}</p>
-          {quickPrompts.slice(0, 4).map((q, i) => (
-            <button key={i} className="quick-prompt" onClick={() => sendMessage(q)}>
-              💬 {q}
-            </button>
-          ))}
+    <div className="cb-layout">
+      {/* Sidebar (Web Only - hidden via CSS on mobile) */}
+      <aside className="cb-sidebar">
+        <div className="cb-sidebar-header">
+          <div className="cb-sidebar-brand">
+            <div className="cb-sidebar-brand-icon">⚖️</div>
+            <span>JusticeBot</span>
+          </div>
+        </div>
 
-          <p className="sidebar-section-title" style={{ marginTop: 8 }}>{isHi ? 'सेवाएं' : 'Services'}</p>
-          {SIDEBAR_SERVICES.map((s, i) => (
-            <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="sidebar-service">
-              <span>{s.icon}</span>
-              <span>{isHi ? s.labelHi : s.label}</span>
-              <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--text-muted)' }}>↗</span>
-            </a>
-          ))}
-
-          <Link to="/case-status" className="sidebar-service" style={{ marginTop: 4, color: 'var(--saffron)' }}>
-            <span>📋</span>
-            <span>{isHi ? 'केस स्टेटस' : 'Case Status'}</span>
-          </Link>
-        </aside>
-
-        {/* Main Chat */}
-        <div className="chat-main">
-          <div className="chat-header">
-            <div className="bot-avatar" style={{ width: 40, height: 40, fontSize: 18 }}>⚖️</div>
-            <div>
-              <h3 style={{ fontSize: 15, fontWeight: 700, color: 'var(--white)' }}>JusticeBot</h3>
-              <div className="bot-status">
-                <div className="status-dot"></div>
-                <span style={{ fontSize: 12 }}>{isHi ? 'ऑनलाइन — न्याय सहायक' : 'Online — DoJ Legal Assistant'}</span>
-              </div>
-            </div>
-            <div style={{ marginLeft: 'auto', fontSize: 12, color: 'var(--text-muted)' }}>
-              {isHi ? '🇮🇳 भारत सरकार' : '🇮🇳 Govt. of India'}
+        <div className="cb-sidebar-content">
+          {/* Quick Prompts */}
+          <div className="cb-sidebar-section">
+            <span className="cb-sidebar-title">{isHi ? 'त्वरित संकेत' : 'Quick Prompts'}</span>
+            <div className="cb-sidebar-list">
+              {quickPrompts.map((q, i) => (
+                <button key={i} className="cb-sidebar-item" onClick={() => sendMessage(q)}>
+                  <span className="icon">💬</span>
+                  <span>{q}</span>
+                </button>
+              ))}
             </div>
           </div>
 
-          <div className="chat-messages">
+          {/* Legal Services */}
+          <div className="cb-sidebar-section">
+            <span className="cb-sidebar-title">{isHi ? 'कानूनी सेवाएं' : 'Services'}</span>
+            <div className="cb-sidebar-list">
+              {LEGAL_SERVICES.map((s, i) => (
+                <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="cb-sidebar-item service">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <span className="icon">{s.icon}</span>
+                    <span>{s.name[lang]}</span>
+                  </div>
+                  <span className="external-icon">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div className="cb-page">
+        {/* Header */}
+        <div className="cb-header">
+          <div className="cb-header-avatar">⚖️</div>
+          <div className="cb-header-info">
+            <span className="cb-header-name">JusticeBot</span>
+            <span className="cb-header-status">
+              <span className="cb-status-dot" />
+              {isHi ? 'ऑनलाइन' : 'Online'}
+            </span>
+          </div>
+          <div className="cb-header-gov">{isHi ? '🇮🇳 भारत सरकार' : '🇮🇳 Govt. of India'}</div>
+        </div>
+
+        {/* Messages Area */}
+        <div className="cb-messages-area">
+          <div className="cb-messages-inner">
             {messages.length === 0 ? (
-              <div className="chat-welcome">
-                <div className="welcome-avatar">⚖️</div>
-                <h2 className="welcome-title">{isHi ? 'नमस्ते! मैं JusticeBot हूं' : 'Namaste! I\'m JusticeBot'}</h2>
-                <p className="welcome-sub">
+              <div className="cb-welcome">
+                <div className="cb-welcome-avatar">⚖️</div>
+                <h2 className="cb-welcome-title">
+                  {isHi ? 'नमस्ते! मैं JusticeBot हूं' : "Namaste! I'm JusticeBot"}
+                </h2>
+                <p className="cb-welcome-sub">
                   {isHi
-                    ? 'मैं भारत के न्याय विभाग का AI सहायक हूं। कानूनी सवाल पूछें, केस स्टेटस जानें, या सेवाओं के बारे में जानकारी लें।'
-                    : 'I\'m the AI assistant for India\'s Department of Justice. Ask me about legal rights, case status, judicial services, or any legal guidance you need.'}
+                    ? 'भारत के न्याय विभाग का AI सहायक। कानूनी सवाल पूछें या विषय चुनें।'
+                    : "AI assistant for India's Department of Justice. Ask a legal question or pick a topic below."}
                 </p>
-                <div className="quick-prompts-row">
+                <div className="cb-chips">
                   {quickPrompts.map((q, i) => (
-                    <button key={i} className="quick-chip" onClick={() => sendMessage(q)}>{q}</button>
+                    <button key={i} className="cb-chip" onClick={() => sendMessage(q)}>{q}</button>
                   ))}
                 </div>
               </div>
             ) : (
-              messages.map((msg, i) => (
-                <div key={i} className={`message-row ${msg.role}`}>
-                  <div className={`msg-avatar ${msg.role}`}>
-                    {msg.role === 'bot' ? '⚖️' : '👤'}
-                  </div>
-                  <div>
-                    <div className={`message-bubble ${msg.role}`}>
-                      {msg.role === 'bot' ? (
-                        <ReactMarkdown
-                          components={{
-                            p: ({ children }) => <p style={{ margin: 0 }}>{children}</p>,
-                            strong: ({ children }) => <strong style={{ color: 'var(--saffron)' }}>{children}</strong>,
-                            a: ({ href, children }) => <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: '#64B5F6' }}>{children}</a>,
-                          }}
-                        >{msg.content}</ReactMarkdown>
-                      ) : (
-                        <p>{msg.content}</p>
-                      )}
+              <>
+                {messages.map((msg, i) => (
+                  <div key={i} className={`cb-msg-row ${msg.role}`}>
+                    {msg.role === 'bot' && (
+                      <div className="cb-msg-avatar bot">⚖️</div>
+                    )}
+                    <div className="cb-msg-content">
+                      <div className={`cb-bubble ${msg.role}`}>
+                        {msg.role === 'bot' ? (
+                          <ReactMarkdown
+                            components={{
+                              p: ({ children }) => <p style={{ margin: 0 }}>{children}</p>,
+                              strong: ({ children }) => <strong style={{ color: 'var(--saffron)' }}>{children}</strong>,
+                              a: ({ href, children }) => <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--blue-light)', textDecoration: 'underline' }}>{children}</a>,
+                            }}
+                          >{msg.content}</ReactMarkdown>
+                        ) : (
+                          <p style={{ margin: 0 }}>{msg.content}</p>
+                        )}
+                      </div>
+                      <div className={`cb-time ${msg.role}`}>{formatTime(msg.timestamp)}</div>
                     </div>
-                    <div className="message-time">{formatTime(msg.timestamp)}</div>
+                    {msg.role === 'user' && (
+                      <div className="cb-msg-avatar user">👤</div>
+                    )}
                   </div>
-                </div>
-              ))
-            )}
+                ))}
 
-            {isLoading && (
-              <div className="message-row bot">
-                <div className="msg-avatar bot">⚖️</div>
-                <div className="typing-indicator">
-                  <div className="typing-dot"></div>
-                  <div className="typing-dot"></div>
-                  <div className="typing-dot"></div>
-                </div>
-              </div>
+                {isLoading && (
+                  <div className="cb-msg-row bot">
+                    <div className="cb-msg-avatar bot">⚖️</div>
+                    <div className="cb-msg-content">
+                      <div className="cb-bubble bot cb-typing">
+                        <span className="cb-dot" />
+                        <span className="cb-dot" />
+                        <span className="cb-dot" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
-
             <div ref={messagesEndRef} />
           </div>
+        </div>
 
-          {/* Input */}
-          <div className="chat-input-area">
-            <div className="chat-input-wrapper">
-              <textarea
-                ref={textareaRef}
-                className="chat-input"
-                rows={1}
-                placeholder={isHi ? 'अपना कानूनी सवाल टाइप करें... (Enter से भेजें)' : 'Type your legal question... (Enter to send)'}
-                value={input}
-                onChange={handleInput}
-                onKeyDown={handleKey}
-                disabled={isLoading}
-              />
-              <button className="send-btn" onClick={() => sendMessage()} disabled={!input.trim() || isLoading} title="Send">
-                {isLoading ? <span className="spinner-small"></span> : '➤'}
-              </button>
-            </div>
-            <p className="chat-input-footer">
-              {isHi
-                ? 'JusticeBot AI सहायता प्रदान करता है। गंभीर कानूनी मामलों के लिए योग्य वकील से परामर्श लें।'
-                : 'JusticeBot provides guidance only. For serious legal matters, consult a qualified lawyer.'}
-            </p>
+        {/* Input Area */}
+        <div className="cb-input-area">
+          <div className="cb-input-pill">
+            <textarea
+              ref={textareaRef}
+              className="cb-input"
+              rows={1}
+              placeholder={isHi ? 'अपना प्रश्न लिखें...' : 'Ask your legal question...'}
+              value={input}
+              onChange={handleInput}
+              onKeyDown={handleKey}
+              disabled={isLoading}
+            />
+            <button
+              className={`cb-send-btn ${input.trim() && !isLoading ? 'active' : ''}`}
+              onClick={() => sendMessage()}
+              disabled={!input.trim() || isLoading}
+            >
+              {isLoading ? <span className="spinner-small" /> : '↑'}
+            </button>
           </div>
+          <p className="cb-footer-note">
+            {isHi
+              ? 'JusticeBot AI सहायता प्रदान करता है। गंभीर मामलों में वकील से परामर्श लें।'
+              : 'JusticeBot provides guidance only. For serious matters, consult a qualified lawyer.'}
+          </p>
         </div>
       </div>
     </div>

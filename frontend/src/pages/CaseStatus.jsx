@@ -35,9 +35,9 @@ export default function CaseStatus() {
   const handleKey = (e) => e.key === 'Enter' && search();
 
   return (
-    <div className="case-status-page">
-      <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+    <div className="page-container case-status-page">
+      <div className="container" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 24 }}>
           <div className="section-tag" style={{ margin: '0 auto 14px' }}>📋</div>
           <h1 style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 800, color: 'var(--white)', marginBottom: 10 }}>
             {isHi ? 'केस स्टेटस चेक करें' : 'Case Status Check'}

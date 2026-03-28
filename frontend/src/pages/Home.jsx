@@ -20,61 +20,80 @@ export default function Home() {
   const isHi = lang === 'hi';
 
   return (
-    <>
-      {/* Hero */}
+    <div className="page-container">
       <section className="hero">
         <div className="hero-bg" />
         <div className="hero-grid" />
-        <div className="container hero-content">
-          <div className="hero-text">
-            <div className="hero-badge">🇮🇳 {isHi ? 'भारत सरकार' : 'Government of India'}</div>
-            <h1 className="hero-title">
-              {isHi ? (
-                <><span className="highlight">AI-powered</span><br />कानूनी सहायक</>
-              ) : (
-                <>Your <span className="highlight">AI-Powered</span><br />Legal Assistant</>
-              )}
-            </h1>
-            <p className="hero-desc">
-              {isHi
-                ? 'न्याय विभाग, भारत सरकार द्वारा संचालित। केस स्थिति, टेली-लॉ, कानूनी सहायता और न्यायिक सेवाओं के लिए तुरंत मार्गदर्शन पाएं।'
-                : 'Powered by the Department of Justice, Government of India. Get instant guidance on case status, Tele-Law, legal aid, and judicial services — in your language.'}
-            </p>
-            <div className="hero-actions">
-              <Link to="/chatbot" className="btn btn-primary">💬 {isHi ? 'JusticeBot से पूछें' : 'Ask JusticeBot'}</Link>
-              <Link to="/services" className="btn btn-secondary">🏛️ {isHi ? 'सेवाएं देखें' : 'Explore Services'}</Link>
+        <div className="container">
+          <div className="hero-content">
+            <div className="hero-left" style={{ animation: 'fadeUp 0.8s ease-out' }}>
+              <div className="hero-badge">
+                <span>🛡️</span>
+                <span>{isHi ? 'न्याय विभाग, भारत सरकार' : 'Dept. of Justice, GoI'}</span>
+              </div>
+              <h1 className="hero-title">
+                {isHi ? (
+                  <>आपकी <span className="highlight">कानूनी प्रगति</span> के साथ</>
+                ) : (
+                  <>Empowering your <span className="highlight">Legal Journey</span></>
+                )}
+              </h1>
+              <p className="hero-desc">
+                {isHi 
+                  ? 'आर्टिफिशियल इंटेलिजेंस के साथ कानूनी सहायता को सरल बनाना। सूचना तक पहुंचें, सेवाओं का लाभ उठाएं और न्याय को अधिक सुलभ बनाएं।'
+                  : 'Simplifying legal assistance with AI. Access information, avail services, and make justice more accessible for everyone.'}
+              </p>
+              <div className="hero-actions">
+                <Link to="/chatbot" className="btn btn-primary">
+                  {isHi ? 'जस्टिसबॉट से पूछें' : 'Ask JusticeBot'}
+                </Link>
+                <Link to="/case-status" className="btn btn-secondary">
+                  {isHi ? 'केस स्थिति' : 'Case Status'}
+                </Link>
+              </div>
+              <div className="hero-stats">
+                <div className="stat-item">
+                  <span className="stat-value">24x7</span>
+                  <span className="stat-label">{isHi ? 'सहायता' : 'AI Support'}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-value">500+</span>
+                  <span className="stat-label">{isHi ? 'कानूनी नियम' : 'Legal Provisions'}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-value">Free</span>
+                  <span className="stat-label">{isHi ? 'पहुंच' : 'Accessible'}</span>
+                </div>
+              </div>
             </div>
-            <div className="hero-stats">
-              <div className="stat-item"><span className="stat-value">25,000+</span><span className="stat-label">{isHi ? 'न्यायालय' : 'Courts'}</span></div>
-              <div className="stat-item"><span className="stat-value">4.5 Cr+</span><span className="stat-label">{isHi ? 'लंबित मामले' : 'Pending Cases'}</span></div>
-              <div className="stat-item"><span className="stat-value">4.5L+</span><span className="stat-label">{isHi ? 'टेली-लॉ सत्र' : 'Tele-Law Sessions'}</span></div>
-            </div>
-          </div>
 
-          {/* Hero demo card */}
-          <div className="hero-visual">
-            <div className="hero-card glass float">
-              <div className="hero-card-header">
-                <div className="bot-avatar">⚖️</div>
-                <div className="bot-info">
-                  <h4>JusticeBot</h4>
-                  <div className="bot-status"><div className="status-dot"></div> Online</div>
+            <div className="hero-right hidden-mobile" style={{ animation: 'fadeScale 1s ease-out' }}>
+              <div className="hero-card glass">
+                <div className="hero-card-header">
+                  <div className="bot-avatar">⚖️</div>
+                  <div className="bot-info">
+                    <h4>JusticeBot</h4>
+                    <div className="bot-status">
+                      <div className="status-dot"></div>
+                      <span>{isHi ? 'ऑनलाइन' : 'Online'}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="hero-messages">
-                <div className="hero-msg bot" style={{ animationDelay: '0.2s' }}>
-                  {isHi ? '🙏 नमस्ते! मैं JusticeBot हूं। आज मैं आपकी कैसे सहायता कर सकता हूं?' : '🙏 Namaste! I\'m JusticeBot. How can I assist you today?'}
+                <div className="hero-messages">
+                  <div className="hero-msg bot">
+                    {isHi ? 'नमस्ते! मैं आपकी कानूनी सहायता कैसे कर सकता हूँ?' : 'Namaste! How can I assist you with legal information today?'}
+                  </div>
+                  <div className="hero-msg user">
+                    {isHi ? 'मेरा केस स्टेटस कैसे चेक करें?' : 'How do I check my case status?'}
+                  </div>
+                  <div className="hero-msg bot">
+                    {isHi ? 'आप CNR नंबर का उपयोग करके स्टेटस देख सकते हैं।' : 'You can check your status using the CNR number.'}
+                  </div>
                 </div>
-                <div className="hero-msg user" style={{ animationDelay: '0.4s' }}>
-                  {isHi ? 'मेरा केस स्टेटस कैसे चेक करूं?' : 'How do I check my case status?'}
+                <div className="hero-input-mock">
+                  <span>{isHi ? 'सवाल टाइप करें...' : 'Ask a question...'}</span>
+                  <span>➤</span>
                 </div>
-                <div className="hero-msg bot" style={{ animationDelay: '0.6s' }}>
-                  {isHi ? '✅ अपने CNR नंबर से ecourts.gov.in पर जाएं या यहाँ Case Status सेक्शन में चेक करें।' : '✅ Use your CNR number on ecourts.gov.in or check instantly in the Case Status section here!'}
-                </div>
-              </div>
-              <div className="hero-input-mock">
-                <span>{isHi ? 'अपना सवाल टाइप करें...' : 'Type your legal question...'}</span>
-                <span style={{ fontSize: 18 }}>📤</span>
               </div>
             </div>
           </div>
@@ -136,6 +155,33 @@ export default function Home() {
           </Link>
         </div>
       </section>
-    </>
+
+      <style>{`
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeScale {
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.5); opacity: 0.5; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        .hero-right.hidden-mobile {
+          display: flex;
+        }
+        @media (max-width: 991px) {
+          .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+          .hero-left { display: flex; flex-direction: column; align-items: center; }
+          .hero-desc { margin-left: auto; margin-right: auto; }
+          .hero-actions { justify-content: center; }
+          .hero-stats { justify-content: center; }
+          .hero-right.hidden-mobile { display: none; }
+        }
+      `}</style>
+    </div>
   );
 }

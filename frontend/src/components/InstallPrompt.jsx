@@ -49,14 +49,14 @@ const InstallPrompt = () => {
   return (
     <div style={{
       position: 'fixed',
-      bottom: '20px',
+      bottom: window.innerWidth <= 768 ? '90px' : '20px',
       left: '50%',
       transform: 'translateX(-50%)',
       backgroundColor: '#1e293b',
       padding: '16px 24px',
       borderRadius: '16px',
       boxShadow: '0 10px 25px rgba(0,0,0,0.5), 0 0 15px rgba(249, 115, 22, 0.2)',
-      zIndex: 1000,
+      zIndex: 2000,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

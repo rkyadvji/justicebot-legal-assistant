@@ -2,6 +2,13 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer>
+      <style>{`
+        @media (max-width: 768px) {
+          footer {
+            display: none !important;
+          }
+        }
+      `}</style>
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">

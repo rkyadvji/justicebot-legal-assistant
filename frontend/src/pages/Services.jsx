@@ -26,7 +26,7 @@ export default function Services() {
   }, [lang]);
 
   return (
-    <>
+    <div className="page-container services-page">
       <div className="page-hero">
         <div className="container">
           <div className="section-tag" style={{ margin: '0 auto 14px' }}>🏛️ {isHi ? 'सेवाएं' : 'Services'}</div>
@@ -85,6 +85,6 @@ export default function Services() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
